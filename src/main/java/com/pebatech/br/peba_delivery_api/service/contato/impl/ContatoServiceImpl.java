@@ -4,6 +4,7 @@ import com.pebatech.br.peba_delivery_api.domain.dto.contato.ContatoDto;
 import com.pebatech.br.peba_delivery_api.domain.form.contato.ContatoForm;
 import com.pebatech.br.peba_delivery_api.domain.mapper.contato.ContatoMapper;
 import com.pebatech.br.peba_delivery_api.domain.model.contato.Contato;
+import com.pebatech.br.peba_delivery_api.domain.model.pessoa.Pessoa;
 import com.pebatech.br.peba_delivery_api.repository.contato.ContatoRepository;
 import com.pebatech.br.peba_delivery_api.repository.pessoa.PessoaRepository;
 import com.pebatech.br.peba_delivery_api.service.contato.IContatoService;
@@ -28,15 +29,19 @@ public class ContatoServiceImpl implements IContatoService {
     @Autowired
     private ContatoMapper mapper;
 
-
     @Override
     public ContatoDto cadastrar(ContatoForm form) {
-        Contato ContatoSalvar = mapper.toModel(form);
+        Contato contatoSalvar = mapper.toModel(form);
         // TODO adicionar validação do valor de contato de acordo com o tipo
-        if (Objects.nonNull(form.getUuidPessoa()) && !pessoaRepository.existsByUuid(form.getUuidPessoa())){
-            throw new EntityNotFoundException("Nenhuma pessoa localizada para o id informado!");
+        if (Objects.nonNull(form.getUuidPessoa())){
+            Optional<Pessoa> pessoa = pessoaRepository.findByUuid(form.getUuidPessoa());
+            if (pessoa.isEmpty()){
+                throw new EntityNotFoundException("Nenhuma pessoa localizada para o id informado!");
+            }else {
+                contatoSalvar.setPessoa(pessoa.get());
+            }
         }
-        Contato ContatoSalvo = repository.save(ContatoSalvar);
+        Contato ContatoSalvo = repository.save(contatoSalvar);
         return mapper.toDto(ContatoSalvo);
     }
 
