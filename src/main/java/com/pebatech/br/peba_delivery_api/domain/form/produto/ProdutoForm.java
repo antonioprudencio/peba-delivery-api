@@ -26,6 +26,6 @@ public class ProdutoForm {
     private CategoriaProdutoEnum categoria;
 
     @NotNull(message = "A disponibilidade do produto deve ser informada!")
-    private Boolean disponivel;
+    private Boolean ativo;
 }
 

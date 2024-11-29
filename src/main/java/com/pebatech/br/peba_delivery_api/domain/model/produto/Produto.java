@@ -29,7 +29,4 @@ public class Produto extends ModeloGenerico {
     @Column(nullable = false)
     private CategoriaProdutoEnum categoria;
 
-    @Column(nullable = false)
-    private Boolean disponivel = Boolean.TRUE;
-
 }
