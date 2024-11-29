@@ -9,6 +9,6 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PessoaMapper extends EntityMapper<PessoaDto, Pessoa, PessoaForm> {
     Pessoa map(PessoaDto value);
-    void updateModel(PessoaForm form, @MappingTarget Pessoa contato);
+    void updateModel(PessoaForm form, @MappingTarget Pessoa pessoa);
 
 }
