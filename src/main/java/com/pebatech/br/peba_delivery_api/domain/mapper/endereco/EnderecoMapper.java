@@ -15,5 +15,5 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 public interface EnderecoMapper extends EntityMapper<EnderecoDto, Endereco, EnderecoForm> {
     Contato map(ContatoDto value);
 
-    void updateModel(EnderecoForm form, @MappingTarget Endereco contato);
+    void updateModel(EnderecoForm form, @MappingTarget Endereco endereco);
 }
