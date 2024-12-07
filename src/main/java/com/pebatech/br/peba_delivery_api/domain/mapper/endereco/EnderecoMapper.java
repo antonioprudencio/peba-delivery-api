@@ -13,7 +13,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface EnderecoMapper extends EntityMapper<EnderecoDto, Endereco, EnderecoForm> {
-    Contato map(ContatoDto value);
+    Endereco map(EnderecoDto value);
 
     void updateModel(EnderecoForm form, @MappingTarget Endereco endereco);
 }
